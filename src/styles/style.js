@@ -20,6 +20,11 @@ export default StyleSheet.create({
         borderTopWidth: 1,
         borderColor: "white"
     },
+    noResults: {
+      flex:1,
+      justifyContent: 'center',
+      alignItems: 'center' 
+    },
     // LIST ELEMENT
     row: {
         alignItems: 'center',

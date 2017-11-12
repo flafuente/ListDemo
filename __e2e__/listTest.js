@@ -5,10 +5,10 @@ import {
     expect
 } from 'chai'
 const config = {
-    platformName: "iOS",
-    platformVersion: "11.1",
-    deviceName: "iPhone 6",
-    app: "/Users/fernandolafuentesaiz/Desktop/htdocs/ListDemo/ios/build/Build/Products/Debug-iphonesimulator/ListDemo.app"
+    platformName: 'iOS',
+    platformVersion: '11.1',
+    deviceName: 'iPhone 6',
+    app: '/Users/fernandolafuentesaiz/Desktop/htdocs/ListDemo/ios/build/Build/Products/Debug-iphonesimulator/ListDemo.app'
 };
 
 const port = 4723;

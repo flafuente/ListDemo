@@ -1,4 +1,4 @@
- export default {
+export default {
     "object": "list",
     "page": 1,
     "limit": 50,

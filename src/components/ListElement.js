@@ -1,26 +1,24 @@
-'use strict';
-
 import React, { Component } from 'react';
 import {
-  Image,
   Text,
-  View
+  View,
 } from 'react-native';
-import styles from '../styles/style.js';
-import ImageWithPlaceholder from './ImageWithPlaceholder'
-const placeholder = require('../images/placeholder.png');
+import styles from '../styles/style';
+import ImageWithPlaceholder from './ImageWithPlaceholder';
+// const placeholder = require('../images/placeholder.png');
 export default class ListElement extends Component {
-
   render({ element } = this.props) {
     return (
       <View>
         <View style={styles.row}>
           <View style={styles.imageContainer}>
-              {/* {<Image defaultSource={placeholder} source={{uri: element.item.image_url}} style={styles.elementImage} />} */}
-              {<ImageWithPlaceholder
+            {/* {<Image defaultSource={placeholder}
+            source={{uri: element.item.image_url}}
+            style={styles.elementImage} />} */}
+            {<ImageWithPlaceholder
               duration={1000}
               src={element.item.image_url}
-              />}
+            />}
           </View>
           <View style={styles.textContainer}>
             <Text testID={'nameText'} style={styles.elementName}>

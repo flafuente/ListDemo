@@ -1,24 +1,24 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Image,
   View,
-  Animated
-} from "react-native";
+  Animated,
+} from 'react-native';
+import styles from '../styles/style';
 
 const placeholder = require('../images/placeholder.png');
-import styles from '../styles/style.js';
 
 export default class ImageWithPlaceholder extends Component {
   static defaultProps = {
     duration: 750,
-    resizeMode: "contain"
+    resizeMode: 'contain',
   };
 
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
-      fadeAnim: new Animated.Value(1)
+      fadeAnim: new Animated.Value(1),
     };
   }
 
@@ -53,11 +53,11 @@ export default class ImageWithPlaceholder extends Component {
   }
 
   _getPlaceholderStyles = () => {
-    let container = [styles.placeholderContainer];
+    const container = [styles.placeholderContainer];
     if (!this.state.isLoading) {
       Animated.timing(this.state.fadeAnim, {
         toValue: 0,
-        duration: this.props.duration
+        duration: this.props.duration,
       }).start();
       container.push({ opacity: this.state.fadeAnim });
     }
