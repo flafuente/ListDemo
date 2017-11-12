@@ -1,20 +1,13 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
   FlatList,
-  StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import ListElement from './components/ListElement';
-import styles from './styles/style.js';
+import styles from './styles/style';
 
 const fetchApi = require('./api/fetch');
 
@@ -27,7 +20,7 @@ export default class App extends Component {
     page: 1,
     limit: 10,
     dataElements: [],
-    refreshing: false
+    refreshing: false,
   }
   componentDidMount() {
     this.fetchItems();
@@ -53,11 +46,11 @@ export default class App extends Component {
       isLoadingTail: true,
       onEndReachedCalledDuringMomentum: false,
       endReached: false,
-      dataElements: []
+      dataElements: [],
     },
     () => {
       this.fetchItems();
-    }
+    },
   );
   }
   _onEndReached = () => {
@@ -67,7 +60,7 @@ export default class App extends Component {
     }
     this.setState({
         page: this.state.page + 1,
-        isLoadingTail: true
+        isLoadingTail: true,
       },
       () => {
         this.fetchItems();
@@ -83,14 +76,14 @@ export default class App extends Component {
         onEndReachedCalledDuringMomentum: false,
         endReached: false,
         searchParam: '',
-        dataElements: []
+        dataElements: [],
       },
       () => {
         this.fetchItems();
       }); 
 
   }
-  _renderItem = (element,index) => {
+  _renderItem = (element, index) => {
     return (
       <ListElement
         testID={'listRow'}
@@ -100,12 +93,12 @@ export default class App extends Component {
     );
   }
   _renderHeader = () => {
-    return <SearchBar 
+    return <SearchBar
               testID={'searchBar'}
-              placeholder="Type Here..." 
+              placeholder="Type Here..."
               clearIcon = {{ name: 'clear' }}
               onEndEditing={this._onEndEditing}
-              onClearText = {() => { this._onRefresh(false)}}
+              onClearText = {() => { this._onRefresh(false); } }
               returnKeyLabel={'Search'}
               returnKeyType={'done'}
               round />;
@@ -118,8 +111,16 @@ export default class App extends Component {
           </View>
         );
   }
+  _renderMessage = () => {
+    return (
+        <View style={styles.noResults}>
+            <Text>No results!</Text>
+        </View>
+    )
+}
   render() {
-    const { isLoading } = this.state;
+    const { isLoading, dataElements, isLoadingTail } = this.state;
+    const noResults = (dataElements.length===0) ? true: false;
     return (
       <View style={styles.container}>
         {isLoading
@@ -129,14 +130,15 @@ export default class App extends Component {
             renderItem={this._renderItem}
             keyExtractor={(item, key) => key}
             onEndReached={this._onEndReached}
-            onEndReachedThreshold={0} 
-            onRefresh={() => { this._onRefresh(true)}}
+            onEndReachedThreshold={0}
+            onRefresh={() => { this._onRefresh(true); }}
             refreshing={this.state.refreshing}
             ListFooterComponent={this._renderFooter.bind(this)}
             ListHeaderComponent={this._renderHeader}
-            onMomentumScrollBegin={() => { this.state.onEndReachedCalledDuringMomentum = false; }}
+            onMomentumScrollBegin={() => { this.setState({ onEndReachedCalledDuringMomentum: false }); }}
           />
         }
+        {noResults && !isLoadingTail ? this._renderMessage(): null }
       </View>
       
     );
