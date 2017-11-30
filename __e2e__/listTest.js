@@ -1,3 +1,6 @@
+// WebDriver API docs
+// https://github.com/admc/wd/blob/master/doc/api.md
+
 import wd, {
     TouchAction
 } from 'wd';
@@ -10,6 +13,11 @@ const config = {
     deviceName: 'iPhone 6',
     app: '/Users/fernandolafuentesaiz/Desktop/htdocs/ListDemo/ios/build/Build/Products/Debug-iphonesimulator/ListDemo.app'
 };
+// const config = {
+//     platformName: 'Android',
+//     deviceName: 'Android Emulator',
+//     app: '/Users/fernandolafuentesaiz/Desktop/htdocs/AppWithTests/android/app/build/outputs/apk/app-debug.apk' // relative to root of project
+// };
 
 const port = 4723;
 const driver = wd.promiseChainRemote('localhost', port);
@@ -47,6 +55,9 @@ describe('Default List interactions', () => {
         // await driver.sleep(4000);
 
         const elements = await driver.elementsByName('nameText');
+        // **** ANDROID PURPOSES *****
+        // const elements = await driver.elementsByAccessibilityId('nameText');
+      
         expect(elements.length).to.equal(10);
     });
     it('should load 20 elements after scrolling', async() => {
