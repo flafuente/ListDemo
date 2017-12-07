@@ -5,11 +5,19 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest --testMatch=\"**/__tests__/**/*.js\"",
-    "test:e2e": "jest --testMatch=\"**/__e2e__/**/*.js\"",
+    "pretest:e2e": "echo 'hi'",
+    
+    "test:e2e:android": "jest --testMatch='**/__e2e__/**/*.android.js'",
+    "test:e2e:ios": "jest --testMatch='**/__e2e__/**/*.ios.js'",
+    "pretest:e2e:android": "grunt replaceandroid",
+    "pretest:e2e:ios": "grunt replaceios",
+  
+    
     "appium": "appium",
     "appium:doctor": "appium-doctor"
   },
   "dependencies": {
+    "grunt": "^1.0.1",
     "react": "16.0.0",
     "react-native": "0.50.3",
     "react-native-elements": "^0.18.2",
@@ -31,6 +39,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-react-native": "^3.0.1",
+    "grunt-text-replace": "^0.4.0",
     "jest": "21.2.1",
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.1.0",
@@ -38,6 +47,7 @@
     "wd": "^1.4.1"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "verbose": true
   }
 }
